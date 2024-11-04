@@ -1,4 +1,3 @@
-import { TextStyle, ViewStyle } from "react-native";
 
 export type UserType ={
     label: string;
