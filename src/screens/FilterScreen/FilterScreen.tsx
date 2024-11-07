@@ -11,8 +11,9 @@ import HeaderView from "../../components/Header/HeaderView";
 import UserComponents from "./components/userComponent/UserComponent";
 import SeparatorComponent from "../../components/separatorComponent/SeparatorComponent";
 import styles from "./styles";
-import RadioButton from "./components/RadioButton/RadioButtom";
+import RadioButton from "./components/RadioButton/RadioButton";
 import { toCamelCase } from "../../utility/Utils";
+import { SEARCH_INPUT_TXT_TESTID,LOADER_INDICATION_TESTID, FILTER_SCREEN_ERROR_TEXT_ID } from "../../utility/TestIds";
 
 const userTypeArr: UserType[] = [
   {
@@ -62,7 +63,7 @@ const FilterScreen = ({}: FilterScreenProps) => {
     setRole(selectedRole);
     setSearchUser('');
   }
-
+  
   useEffect(()=>{
     if(searchUser.trim().length > 0 ){
       if(data?.listZellerCustomers?.items){
@@ -74,7 +75,7 @@ const FilterScreen = ({}: FilterScreenProps) => {
   if (!!error) {
     return (
       <View style={styles.containerCenter}>
-        <Text>{error.message}</Text>
+        <Text testID={FILTER_SCREEN_ERROR_TEXT_ID}>{error.message}</Text>
       </View>
     );
   }
@@ -86,7 +87,7 @@ const FilterScreen = ({}: FilterScreenProps) => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
-        <TextInput style={styles.inputTxt} onChangeText={onTextChange} value={searchUser} placeholder={SEARCH_USER} />
+        <TextInput testID={SEARCH_INPUT_TXT_TESTID} style={styles.inputTxt} onChangeText={onTextChange} value={searchUser} placeholder={SEARCH_USER} />
         <View style={styles.headerView}>
           <HeaderView headerTxt={USER_TYPE_TXT} />
           <View style={styles.radioViewStyle}>
@@ -114,7 +115,7 @@ const FilterScreen = ({}: FilterScreenProps) => {
       </ScrollView>
       {loading && (
         <View style={styles.loaderStyle}>
-          <ActivityIndicator />
+          <ActivityIndicator testID={LOADER_INDICATION_TESTID} />
         </View>
       )}
     </View>
